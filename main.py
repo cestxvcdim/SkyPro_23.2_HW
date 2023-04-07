@@ -13,10 +13,8 @@ def main_page():
     greetings = {
         "message": "Hello! Input in browse string '/perform_query' and make you query",
         "params": {
-            "cmd1": ["filter", "map", "unique", "sort", "limit"],
-            "cmd2": ["filter", "map", "unique", "sort", "limit"],
-            "value1": "Any",
-            "value2": "Any",
+            "cmd": ["filter", "map", "unique", "sort", "limit"],
+            "value1": "String",
             "filename": "<filename>.txt"
         }
     }

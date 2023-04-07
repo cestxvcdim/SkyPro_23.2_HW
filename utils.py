@@ -1,12 +1,25 @@
-def make_query_response(cmd, val, file_or_result):
+from typing import Iterator, Generator
+
+
+def slice_limit(it: Iterator, limit: int) -> Generator:
+    i = 0
+    for item in it:
+        if i < limit:
+            yield item
+        else:
+            break
+        i += 1
+
+
+def make_query_response(cmd, val, it: Iterator) -> Iterator | Generator:
     match cmd:
         case "filter":
-            return list(filter(lambda x: val in x, file_or_result))
+            return filter(lambda x: val in x, it)
         case "map":
-            return '\n'.join([x.split()[int(val)] for x in file_or_result])
+            return map(lambda v: v.split(" ")[int(val)], it)
         case "unique":
-            return list(set(file_or_result))
+            return iter(set(it))
         case "sort":
-            return sorted(file_or_result, reverse=val == 'desc')
+            return iter(sorted(it, reverse=val == 'desc'))
         case "limit":
-            return list(file_or_result)[:int(val)]
+            return slice_limit(it, int(val))
