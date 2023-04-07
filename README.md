@@ -7,3 +7,4 @@ About project
 ***
 
 * Functional programming
+* Iterators and generators
